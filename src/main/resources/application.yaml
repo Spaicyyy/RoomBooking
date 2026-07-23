@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/MeetingRoom-BookingSystem?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/booking_jwt?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: workbench_user
     password: 090994ss
 
@@ -16,3 +16,6 @@ spring:
     enabled: true
     baseline-on-migrate: true
 
+app:
+  jwt:
+    secret: ${JWT_SECRET:Super_Mega_Secret_Key_Named_Zarifa_Because_This_Key_Is_Always_Stored_In_My_Heart_<3_256bits}

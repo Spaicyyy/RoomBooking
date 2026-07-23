@@ -11,6 +11,7 @@ fun Users.toDto() = UserResponseDto(
     username = this.name,
     email = this.email,
     createdAt = this.createdAt ?: LocalDateTime.now(),
+    roles = this.roles.map { it.name }.toSet(),
 )
 
 fun Rooms.toDto() = RoomResponseDto(

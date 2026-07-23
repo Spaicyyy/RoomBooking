@@ -2,7 +2,23 @@ CREATE TABLE users (
                        id BIGINT AUTO_INCREMENT PRIMARY KEY,
                        name VARCHAR(100) NOT NULL,
                        email VARCHAR(100) NOT NULL UNIQUE,
+                       password VARCHAR(100) NOT NULL ,
                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE roles (
+                    id BIGINT AUTO_INCREMENT PRIMARY KEY ,
+                    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE user_roles (
+                    user_id BIGINT NOT NULL ,
+                    role_id BIGINT NOT NULL ,
+                    PRIMARY KEY (user_id , role_id) ,
+
+                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ,
+
+                    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE rooms (
@@ -24,3 +40,14 @@ CREATE TABLE bookings (
                       CONSTRAINT fk_booking_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
                       CONSTRAINT fk_booking_room FOREIGN KEY (room_id) REFERENCES rooms (id) ON DELETE CASCADE
 );
+
+CREATE TABLE refresh_tokens (
+                    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+                    user_id BIGINT NOT NULL ,
+                    token VARCHAR(255) NOT NULL ,
+                    expiry_date TIMESTAMP NOT NULL ,
+
+                    CONSTRAINT fk_refresh_tokens_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+INSERT INTO roles (name) VALUES ('USER'), ('ADMIN');

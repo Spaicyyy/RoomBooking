@@ -16,13 +16,13 @@ class BookingService(
     val userRepository: UserRepository,
     val roomRepository: RoomRepository,
     ) {
-    fun createBooking(bookingRequest: BookingRequestDto): BookingResponseDto {
+    fun createBooking(bookingRequest: BookingRequestDto, userId:Long): BookingResponseDto {
         if (bookingRequest.endTime.isBefore(bookingRequest.startTime) || bookingRequest.endTime.isEqual(bookingRequest.startTime)) {
             throw IllegalArgumentException("End time must be strictly after start time")
         }
 
-        val user = userRepository.findById(bookingRequest.userId)
-            .orElseThrow { EntityNotFoundException("User with id ${bookingRequest.userId} not found") }
+        val user = userRepository.findById(userId)
+            .orElseThrow { EntityNotFoundException("User with id $userId not found") }
 
         val room = roomRepository.findById(bookingRequest.roomId)
             .orElseThrow { EntityNotFoundException("Room with id ${bookingRequest.roomId} not found") }

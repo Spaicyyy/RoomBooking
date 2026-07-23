@@ -9,9 +9,6 @@ import java.time.LocalDateTime
 
 
 data class BookingRequestDto(
-    @field:NotNull(message = "User id cannot be null")
-    val userId: Long,
-
     @field:NotNull(message = "Room id cannot be null")
     val roomId: Long,
 
