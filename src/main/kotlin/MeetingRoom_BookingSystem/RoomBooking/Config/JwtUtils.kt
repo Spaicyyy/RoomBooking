@@ -11,7 +11,7 @@ import java.util.UUID
 
 @Component
 class JwtUtils (
-    @Value("\${app.app.jwt.secret}") private val secretKey: String
+    @Value("\${app.jwt.secret}") private val secretKey: String
 ){
     // Settings
     private val key: SecretKey = Keys.hmacShaKeyFor(secretKey.toByteArray())
