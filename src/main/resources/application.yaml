@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/MeetingRoom-BookingSystem?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://localhost:3306/booking_session?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: workbench_user
     password: 090994ss
 

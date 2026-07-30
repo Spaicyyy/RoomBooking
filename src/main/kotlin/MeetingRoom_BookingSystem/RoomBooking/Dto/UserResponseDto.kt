@@ -6,5 +6,6 @@ data class UserResponseDto (
     val id : Long,
     val username: String,
     val email: String,
+    val roles: Collection<String>,
     val createdAt: LocalDateTime,
 )

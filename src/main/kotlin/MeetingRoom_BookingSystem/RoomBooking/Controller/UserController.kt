@@ -17,11 +17,4 @@ class UserController (
     private val userService : UserService,
 ){
 
-    @PostMapping
-    fun createUser(
-        @Valid @RequestBody user: UserRequestDto,
-    ): ResponseEntity<UserResponseDto> {
-        val response = userService.createUser(user)
-        return ResponseEntity.status(HttpStatus.CREATED).body(response)
-    }
 }

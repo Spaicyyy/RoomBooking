@@ -11,14 +11,4 @@ import org.springframework.stereotype.Service
 class UserService (
     val userRepository: UserRepository
 ) {
-    fun createUser(userRequestDto: UserRequestDto): UserResponseDto {
-        val user = Users(
-            name = userRequestDto.username,
-            email = userRequestDto.email,
-        )
-
-        val newUser = userRepository.save(user)
-
-        return newUser.toDto()
-    }
 }
