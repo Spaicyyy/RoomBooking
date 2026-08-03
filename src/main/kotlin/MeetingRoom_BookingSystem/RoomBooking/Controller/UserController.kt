@@ -2,7 +2,6 @@ package MeetingRoom_BookingSystem.RoomBooking.Controller
 
 import MeetingRoom_BookingSystem.RoomBooking.Dto.UserResponseDto
 import MeetingRoom_BookingSystem.RoomBooking.Service.UserService
-import com.techservice.technic_service.Dto.UserRequestDto
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -16,12 +15,4 @@ import org.springframework.web.bind.annotation.RestController
 class UserController (
     private val userService : UserService,
 ){
-
-    @PostMapping
-    fun createUser(
-        @Valid @RequestBody user: UserRequestDto,
-    ): ResponseEntity<UserResponseDto> {
-        val response = userService.createUser(user)
-        return ResponseEntity.status(HttpStatus.CREATED).body(response)
-    }
 }

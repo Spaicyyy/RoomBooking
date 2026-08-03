@@ -48,4 +48,12 @@ class BookingService(
 
         return savedBooking.toDto()
     }
+
+    fun getBooking(bookingId: Long) : BookingResponseDto {
+        val booking = bookingRepository.findById(bookingId)
+            .orElseThrow { EntityNotFoundException("Booking with id $bookingId not found") }
+
+        return booking.toDto()
+    }
+
 }
