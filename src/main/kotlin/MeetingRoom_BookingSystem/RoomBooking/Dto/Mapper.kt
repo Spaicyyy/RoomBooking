@@ -10,6 +10,7 @@ fun Users.toDto() = UserResponseDto(
     id = this.id,
     username = this.name,
     email = this.email,
+    roles = this.roles.map { it.name }.toSet(),
     createdAt = this.createdAt ?: LocalDateTime.now(),
 )
 
