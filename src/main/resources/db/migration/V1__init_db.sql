@@ -24,3 +24,12 @@ CREATE TABLE bookings (
                       CONSTRAINT fk_booking_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
                       CONSTRAINT fk_booking_room FOREIGN KEY (room_id) REFERENCES rooms (id) ON DELETE CASCADE
 );
+
+CREATE TABLE api_keys (
+                      id BINGINT AUTO_INCREMENT PRIMARY KEY,
+                      key_hash VARCHAR(100) NOT NULL UNIQUE ,
+                      prefix VARCHAR(100) NOT NULL ,
+                      owner_name VARCHAR(100) NOT NULL,
+                      is_active BOOLEAN NOT NULL DEFAULT TRUE ,
+                      is_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
