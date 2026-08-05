@@ -16,6 +16,14 @@ spring:
     enabled: true
     baseline-on-migrate: true
 
+  profiles:
+    active: prod
+
+  output:
+    ansi:
+      enabled: ALWAYS
+
 app:
   jwt:
     secret: ${JWT_SECRET:Super_Mega_Secret_Key_Named_Zarifa_Because_This_Key_Is_Always_Stored_In_My_Heart_<3_256bits}
+
