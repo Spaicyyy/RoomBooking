@@ -3,6 +3,15 @@ spring:
     url: jdbc:mysql://localhost:3306/booking_session?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: workbench_user
     password: 090994ss
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  session:
+    store-type: redis
+    timeout: 30m
+    redis:
+      namespace: spring:session
 
   jpa:
     hibernate:
