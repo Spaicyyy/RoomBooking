@@ -17,7 +17,7 @@ spring:
     baseline-on-migrate: true
 
   profiles:
-    active: prod
+    active: dev
 
   output:
     ansi:
