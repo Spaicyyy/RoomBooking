@@ -26,6 +26,7 @@ class JwtUtils (
         val expiryDate = Date(now.time + accessTokenExpiration)
 
         return Jwts.builder()
+            .id(UUID.randomUUID().toString())
             .subject(username)
             .claim("userId",userId)
             .claim("roles",roles)
@@ -40,6 +41,22 @@ class JwtUtils (
     }
 
     // Get info from access token
+    fun getJtiFromToken(token:String): String {
+        return Jwts.parser()
+            .verifyWith(key)
+            .build()
+            .parseSignedClaims(token)
+            .payload.id
+    }
+
+    fun getExpiryDateFromToken(token:String): Date {
+        return Jwts.parser()
+            .verifyWith(key)
+            .build()
+            .parseSignedClaims(token)
+            .payload.expiration
+    }
+
     fun getUsernameFromToken(token:String): String? {
         return Jwts.parser()
             .verifyWith(key)

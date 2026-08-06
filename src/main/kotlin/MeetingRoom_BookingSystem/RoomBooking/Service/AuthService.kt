@@ -24,7 +24,8 @@ class AuthService(
     private val jwtUtils: JwtUtils,
     private val refreshTokenService: RefreshTokenService,
     private val refreshTokenRepository: RefreshTokenRepository,
-    private val roleRepository: RolesRepository
+    private val roleRepository: RolesRepository,
+    private val tokenBlacklistService:TokenBlacklistService
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
 
@@ -82,6 +83,27 @@ class AuthService(
             refreshToken = refreshToken,
             username = user.name,
         )
+    }
+
+    fun logout(token:String) {
+        try{
+            val jti = jwtUtils.getJtiFromToken(token)
+            val exp = jwtUtils.getExpiryDateFromToken(token)
+            val userId = jwtUtils.getUserIdFromToken(token)
+
+            val remainingMs = exp.time - System.currentTimeMillis()
+
+            if(remainingMs > 0) {
+                tokenBlacklistService.addToBlacklist(jti,remainingMs)
+                log.info("Token with jti=$jti added to blacklist. TTL: $remainingMs ms")
+            }
+
+            refreshTokenRepository.deleteById(userId)
+            log.info("Refresh token for userId=$userId deleted successfully")
+
+        }catch (ex:Exception){
+            log.warn("Invalid token passed to logout or token already expired: ${ex.message}")
+        }
     }
 
     fun refresh(refreshToken: String): TokensResponseDto {

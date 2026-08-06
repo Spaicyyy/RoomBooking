@@ -8,8 +8,10 @@ import MeetingRoom_BookingSystem.RoomBooking.Service.AuthService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -36,6 +38,14 @@ class AuthController(
         return ResponseEntity.ok(response)
     }
 
+    @DeleteMapping("/logout")
+    fun logout(
+        @RequestHeader("Authorization") authHeader: String
+    ): ResponseEntity<Map<String, String>> {
+        val token = authHeader.removePrefix("Bearer ").trim()
+        authService.logout(token)
+        return ResponseEntity.ok(mapOf("message" to "Successfully logged out"))
+    }
     @PostMapping(value = ["/refresh"])
     fun refresh(
         @RequestParam refreshToken: String,
