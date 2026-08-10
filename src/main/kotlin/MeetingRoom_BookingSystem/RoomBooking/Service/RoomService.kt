@@ -7,6 +7,7 @@ import MeetingRoom_BookingSystem.RoomBooking.Entity.Rooms
 import MeetingRoom_BookingSystem.RoomBooking.Repository.RoomRepository
 import jakarta.persistence.EntityNotFoundException
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
 
 @Service
@@ -30,6 +31,7 @@ class RoomService(
         return newRoom.toDto()
     }
 
+    @Cacheable(value = ["rooms"], key = "#roomId")
     fun getRoom(roomId: Long): RoomResponseDto {
         log.debug("Fetching room with id={}", roomId)
 
