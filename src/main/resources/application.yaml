@@ -22,8 +22,8 @@ spring:
       client:
         registration:
           github:
-            client-id: Ov23liyvBOM1hXJF1qoe
-            client-secret: 1c01b0c3f83b5c410707033cec47e50245ce5718
+            client-id: ${GOOGLE_CLIENT_ID:YOUR_GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET:YOUR_GOOGLE_CLIENT_SECRET}
             scope:
               - read:user
               - user:email
