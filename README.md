@@ -1,26 +1,64 @@
-# Meeting Room Booking System API
+# 🏢 Meeting Room Booking System (REST API)
 
-A robust and scalable backend system for managing meeting room reservations. This project serves as a comprehensive implementation of modern authentication mechanisms, caching strategies, and API security best practices.
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9+-blue.svg?logo=kotlin)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.1+-brightgreen.svg?logo=spring-boot)
+![Spring Security](https://img.shields.io/badge/Spring%20Security-6.x-green.svg?logo=spring-security)
+![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg?logo=mysql)
+![Redis](https://img.shields.io/badge/Redis-7.x-red.svg?logo=redis)
 
-## Key Features
+A robust, scalable, and production-ready REST API built with **Kotlin** and **Spring Boot 3**. 
 
-*   **Multi-Strategy Authentication:** Fully implements and isolates various security protocols, including Basic Auth, Session-based authentication, JWT, OAuth2, OpenID, and API Keys.
-*   **Redis Integration:** Leverages Redis for high-performance data caching, centralized stateless session management, and a robust JWT token blacklisting mechanism for secure logouts.
-*   **Observability & Reliability:** Features advanced logging using Logback with MDC (Mapped Diagnostic Context) for injecting unique `traceId`s, paired with a global exception handler for standardized JSON error responses.
+This repository serves as a comprehensive showcase of modern backend architecture, focusing heavily on **various authentication strategies**, **distributed caching**, and **production observability**. Instead of a monolithic approach, the project was developed using a strict Git Flow, implementing different security and caching architectures in isolated feature branches.
 
-## Tech Stack
+## 🚀 Key Features & Production-Ready Practices
 
-*   **Core:** Kotlin, Java 21, Spring Boot 3
-*   **Data Layer:** MySQL, Spring Data JPA, Hibernate, Flyway Database Migrations
-*   **Security & Infrastructure:** Spring Security, JJWT, Spring Session, Redis, Spring Cache
+* **Advanced Security Architectures:** Explores everything from Basic Auth to stateless JWT with Redis blacklisting and OAuth2/OpenID Connect.
+* **Distributed Caching:** Utilizes Redis for high-performance business data caching (`@Cacheable`) and session management.
+* **Centralized Exception Handling:** Implements `@RestControllerAdvice` to provide consistent, client-friendly RFC 7807 JSON error responses.
+* **Observability & Tracing:** Configured with SLF4J, Logback, and MDC (Mapped Diagnostic Context) to generate structured, traceable logs (`traceId`) ready for ELK stack integration.
+* **Database Versioning:** Safe and predictable database schema migrations using Flyway.
+* **External API Integration:** Demonstrates secure server-to-server communication using custom HTTP Clients (RestClient) to fetch external data (OpenWeather API).
 
-## Branch Architecture
+## 🛠️ Tech Stack
 
-This repository is structured to demonstrate iterative feature development. Each branch represents an isolated implementation of a specific architectural pattern:
-
-*   `feat/auth-session`, `feat/auth-jwt`, `feat/basic-auth` - Core authentication flows.
-*   `feat/oauth2`, `feat/openid-auth`, `feat/api-keys` - External identity providers and service-to-service API protection.
-*   `feat/*-redis`, `feat/*-logback` - Infrastructure improvements including caching, distributed sessions, and advanced request tracing.
+* **Language:** Kotlin (Java 21)
+* **Framework:** Spring Boot 3.x, Spring WebMVC, Spring Data JPA
+* **Security:** Spring Security, OAuth2, JJWT (Java JWT)
+* **Database:** MySQL
+* **Caching & Sessions:** Redis, Spring Session Data Redis, Spring Cache
+* **Migrations:** Flyway
+* **Logging:** Logback, SLF4J, MDC
 
 ---
-*Developed by Əvəz Qurbanlı — Software Engineering Student at Karadeniz Technical University.*
+
+## 🌿 Feature Branches (The Learning Journey)
+
+This project was built modularly. You can check out the specific branches below to see isolated implementations of different architectural patterns:
+
+### Authentication & Security
+* `feat/basic-auth`: Implementation of classic HTTP Basic Authentication.
+* `feat/auth-session`: Stateful session management using in-memory JVM sessions.
+* `feat/auth-session-redis`: Horizontal scaling of sessions using **Spring Session Data Redis**.
+* `feat/auth-jwt`: Stateless authentication using JSON Web Tokens (Access & Refresh tokens).
+* `feat/jwt-redis-blacklist`: Advanced JWT security implementing token revocation/blacklisting via Redis upon logout.
+* `feat/oauth2` & `feat/openid-auth`: Social login and SSO integration using Google OAuth2 and OpenID Connect.
+* `feat/api-keys`: Implementation of custom API Key filters to protect specific endpoints for server-to-server communication.
+
+### Performance & Observability
+* `feat/auth-jwt-logback`: Implementation of structured JSON logging for Dev/Prod profiles with MDC `traceId` injection for request tracing.
+* `feat/jwt-caching-redis`: Business logic optimization using Spring Cache and Redis to cache frequently accessed data (e.g., available rooms) with `@CacheEvict` invalidation.
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+* Java 21+
+* MySQL 8.0+
+* Redis (Local or Docker)
+* Gradle
+
+### 1. Clone the repository
+```bash
+git clone [https://github.com/Spaicyyy/RoomBooking.git](https://github.com/Spaicyyy/RoomBooking.git)
+cd RoomBooking
