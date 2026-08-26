@@ -1,55 +1,26 @@
-# 🏢 Meeting Room Booking System (REST API)
+# Meeting Room Booking System API
 
-![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white)
-![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
-![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+A robust and scalable backend system for managing meeting room reservations. This project serves as a comprehensive implementation of modern authentication mechanisms, caching strategies, and API security best practices.
 
-A robust, scalable, and secure RESTful API for managing meeting room reservations. Built with **Kotlin** and **Spring Boot**, this project demonstrates industry-standard backend development practices, including advanced security mechanisms, distributed caching, and centralized logging.
+## Key Features
 
-## ✨ Key Features
+*   **Multi-Strategy Authentication:** Fully implements and isolates various security protocols, including Basic Auth, Session-based authentication, JWT, OAuth2, OpenID, and API Keys.
+*   **Redis Integration:** Leverages Redis for high-performance data caching, centralized stateless session management, and a robust JWT token blacklisting mechanism for secure logouts.
+*   **Observability & Reliability:** Features advanced logging using Logback with MDC (Mapped Diagnostic Context) for injecting unique `traceId`s, paired with a global exception handler for standardized JSON error responses.
 
-* **Advanced Authentication & Authorization:**
-  * JWT-based authentication (Access & Refresh tokens).
-  * **Redis Token Blacklisting** for secure and immediate user logout.
-  * Role-Based Access Control (RBAC).
-* **High-Performance Caching:** 
-  * Integration with **Spring Data Redis** to cache frequent business queries (e.g., room lists) and automatically evict stale data upon updates (`@Cacheable`, `@CacheEvict`).
-* **Production-Ready Logging:** 
-  * Custom `MdcFilter` injecting `traceId` and user context into all logs.
-  * Configured **Logback** with separate profiles: colorful console output for `dev` and rolling JSON files for `prod` (ready for ELK stack integration).
-* **Robust Error Handling:** 
-  * Centralized `@RestControllerAdvice` catching both business and framework-level exceptions.
-  * Unified JSON error response format containing timestamps, HTTP statuses, and contextual `traceId`.
-* **Database Version Control:** 
-  * **Flyway** migration scripts ensuring consistent schema initialization and updates across environments.
+## Tech Stack
 
-## 🛠️ Tech Stack
+*   **Core:** Kotlin, Java 21, Spring Boot 3
+*   **Data Layer:** MySQL, Spring Data JPA, Hibernate, Flyway Database Migrations
+*   **Security & Infrastructure:** Spring Security, JJWT, Spring Session, Redis, Spring Cache
 
-* **Language:** Kotlin, Java 21
-* **Framework:** Spring Boot 3.x / 4.x
-* **Database:** MySQL (Relational), Spring Data JPA, Hibernate
-* **In-Memory Store / Cache:** Redis, Spring Session
-* **Security:** Spring Security, io.jsonwebtoken (JJWT)
-* **Build Tool:** Gradle (Kotlin DSL)
+## Branch Architecture
 
-## 🌿 Git Flow & Branching Strategy
+This repository is structured to demonstrate iterative feature development. Each branch represents an isolated implementation of a specific architectural pattern:
 
-This repository serves as a portfolio showcase of various architectural approaches. While the `main` branch contains the ultimate, production-ready version of the API, several feature branches explore different authentication patterns:
-* `feat/auth-jwt` / `feat/jwt-redis-blacklist` - JWT tokens with Redis state management.
-* `feat/oauth2` / `feat/openid-auth` - Third-party identity provider integrations.
-* `feat/auth-api-key` - Server-to-server API key validation.
-* `feat/auth-session-redis` - Stateful distributed sessions via Spring Session Redis.
+*   `feat/auth-session`, `feat/auth-jwt`, `feat/basic-auth` - Core authentication flows.
+*   `feat/oauth2`, `feat/openid-auth`, `feat/api-keys` - External identity providers and service-to-service API protection.
+*   `feat/*-redis`, `feat/*-logback` - Infrastructure improvements including caching, distributed sessions, and advanced request tracing.
 
-## 🚀 Getting Started
-
-### Prerequisites
-* Java 21+
-* MySQL Server (running on default port 3306)
-* Redis Server (running on default port 6379)
-
-### 1. Database Setup
-Create a local MySQL database:
-```sql
-CREATE DATABASE booking_jwt;
+---
+*Developed by Əvəz Qurbanlı — Software Engineering Student at Karadeniz Technical University.*
